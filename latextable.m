@@ -9,7 +9,7 @@ function latextable(decimal,labels,varargin)
     %
     %Table Data can only be numbers or strings. No characters
     %
-    %Contact info: Vangelis Katralis, vkatralis@gmail.com, https://github.com/VangelissK, https://gitlab.com/VangelisK
+    %Contact info: Vangelis Katralis, vkatralis@gmail.com, https://github.com/VangelissK , https://gitlab.com/VangelisK
     nvar=nargin-max(size(varargin));
     ncolumns=nargin-nvar;
     nrows=max(size(varargin{1}));
