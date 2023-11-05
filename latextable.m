@@ -82,7 +82,7 @@ function latextable(decimal,labels,varargin)
         if (isstring(varargin{ncolumns}))
             fprintf(' %s \\\\ \n',varargin{ncolumns}(i))
         else
-            fprintf('$%.*f$ \\\\ \n',decimal(j),round(varargin{ncolumns}(i),decimal(j)));
+            fprintf('$%.*f$ \\\\ \n',decimal(ncolumns),round(varargin{ncolumns}(i),decimal(ncolumns)));
         end
         fprintf('\\hline \n');
     end
