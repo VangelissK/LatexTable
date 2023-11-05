@@ -1,7 +1,7 @@
 function latextable(decimal,labels,varargin)
     %latextable(decimal,labels,columns)
     %
-    %First Argument must always be the number of decimal places, which is the same for all values of the table
+    %First Argument must always be the number of decimal places, which can be a vector if for different number of decimal places per column or a single number for the same number of decimal places for all values of the table.
     %
     %Second Argument is the column labels. Needs to be in string form, not character. For no labels, use any number, do not leave empty
     %
@@ -27,6 +27,12 @@ function latextable(decimal,labels,varargin)
     end
     if (ncolumns<=0) 
         error('No data provided')
+    end
+    if (not(max(size(decimal))==1) && not(max(size(decimal))==ncolumns))
+        error('Decimal vector is not the correct size')
+    end
+    if (max(size(decimal))==1)
+        decimal = decimal*ones(ncolumns,1);
     end
     for i=1:(ncolumns-1)
         nnc=size(varargin{i});
@@ -70,13 +76,13 @@ function latextable(decimal,labels,varargin)
             if (isstring(varargin{j})) 
                 fprintf('%s & ',varargin{j}(i));
             else
-                fprintf('$%.*f$ & ',decimal,round(varargin{j}(i),decimal));
+                fprintf('$%.*f$ & ',decimal(j),round(varargin{j}(i),decimal(j)));
             end 
         end
         if (isstring(varargin{ncolumns}))
             fprintf(' %s \\\\ \n',varargin{ncolumns}(i))
         else
-            fprintf('$%.*f$ \\\\ \n',decimal,round(varargin{ncolumns}(i),decimal));
+            fprintf('$%.*f$ \\\\ \n',decimal(j),round(varargin{ncolumns}(i),decimal(j)));
         end
         fprintf('\\hline \n');
     end
